@@ -55,12 +55,74 @@
     </section>
     <!-- fOOD sEARCH Section Ends Here -->
 
+<?php
+$user = 'root';
+$pass='';
+$database = 'proj';
+
+$db = new mysqli('localhost', $user, $pass, $database) or die("NO connection");
+
+?>
+<?php
+// $sql= "SELECT * FROM menu";
+// $res = $db->query($sql);
+// if($res==True)
+// {
+//    while ($obj = $res -> fetch_object()) {
+//     printf("%s (%s)\n", $obj->foodName, $obj->foodPrice);
+//   }
+ 
+
+// }
+?>
 
 
     <!-- fOOD MEnu Section Starts Here -->
     <section class="food-menu">
         <div class="container">
-            <h2 class="text-center">Food Menu</h2>
+        <h2 class="text-center">Food Menu</h2>
+        <?php
+            $sql= "SELECT * FROM menu";
+            $res = $db->query($sql);
+            if($res==True){
+            while ($obj = $res -> fetch_object()) {
+                echo '
+                <div class="food-menu-box">
+                    <div class="food-menu-img">
+                        <img src="images/menu-pizza.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
+                    </div>
+
+                    <div class="food-menu-desc">
+                        <h4>'.$obj->foodName.'</h4>
+                        <p class="food-price">'.$obj->foodPrice.'</p>
+                        <p class="food-detail">'.$obj->foodDescription.
+                        '</p>
+                        <br>
+
+                        <a href="#" class="btn btn-primary">Order Now</a>
+                    </div>
+                </div>';}}
+                 $res -> free_result(); ?>
+
+
+
+            <div class="food-menu-box">
+                <div class="food-menu-img">
+                    <img src="images/menu-pizza.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
+                </div>
+
+                <div class="food-menu-desc">
+                    <h4>Food Title</h4>
+                    <p class="food-price">$2.3</p>
+                    <p class="food-detail">
+                        Made with Italian Sauce, Chicken, and organice vegetables.
+                    </p>
+                    <br>
+
+                    <a href="#" class="btn btn-primary">Order Now</a>
+                </div>
+            </div>
+
 
             <div class="food-menu-box">
                 <div class="food-menu-img">
