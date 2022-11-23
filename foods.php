@@ -8,8 +8,7 @@
 
     <!-- Link our CSS file -->
     <link rel="stylesheet" href="css/style.css">
-    <!-- footer Section Ends Here -->
-    <script src="foods.js"></script>
+
 </head>
 
 <body>
@@ -85,7 +84,7 @@ $db = new mysqli('localhost', $user, $pass, $database) or die("NO connection");
     <!-- fOOD MEnu Section Starts Here -->
     <section class="food-menu">
         <div class="container">
-        <h2 class="text-center">Food Menu</h2>
+        <span><h2 class="text-center">Food Menu</h2></span><a href="cart.php"><span class="btn btn-primary" style="visibility:hidden; position:fixed;" id="carto">Cart</span></a>
         <?php
             $sql= "SELECT * FROM menu";
             $res = $db->query($sql);
@@ -151,5 +150,7 @@ $db = new mysqli('localhost', $user, $pass, $database) or die("NO connection");
 
 
 </body>
+    <!-- footer Section Ends Here -->
+    <script src="foods.js"></script>
 
 </html>

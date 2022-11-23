@@ -8,6 +8,7 @@
 
     <!-- Link our CSS file -->
     <link rel="stylesheet" href="css/style.css">
+
 </head>
 
 <body>
@@ -51,13 +52,12 @@
     </section>
     <!-- fOOD sEARCH Section Ends Here -->
 
+
+
 <?php
-$user = 'root';
-$pass='';
-$database = 'online_orders';
-
-$db = new mysqli('localhost', $user, $pass, $database) or die("NO connection");
-
+$foods = json_decode($_POST);
+foreach($foods as $food)
+    echo $food->ID;
 ?>
 <?php
 // $sql= "SELECT * FROM menu";
@@ -77,29 +77,6 @@ $db = new mysqli('localhost', $user, $pass, $database) or die("NO connection");
     <section class="food-menu">
         <div class="container">
         <h2 class="text-center"></h2>
-        <?php
-            $sql= "SELECT * FROM cart";
-            $res = $db->query($sql);
-            if($res==True){
-            while ($obj = $res -> fetch_object()) {
-                echo '
-                <div class="food-menu-box">
-                    <div class="food-menu-img">
-                        <img src="images/menu-pizza.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
-                    </div>
-
-                    <div class="food-menu-desc">
-                        <h4>'.$obj->foodName.'</h4>
-                        <p class="food-price">'.$obj->foodPrice.'</p>
-                        <p class="food-detail">'.$obj->foodDescription.
-                        '</p>
-                        <br>
-
-                        <a href="#" class="btn btn-primary" name='.$obj->foodDescription.'>Order Now</a>
-                    </div>
-                </div>';}}
-                 $res -> free_result(); ?>
-
 
             </div>
 
@@ -140,4 +117,5 @@ $db = new mysqli('localhost', $user, $pass, $database) or die("NO connection");
     <!-- footer Section Ends Here -->
 
 </body>
+<script src="foods.js"></script>
 </html>
