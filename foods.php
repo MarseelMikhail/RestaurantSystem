@@ -8,6 +8,8 @@
 
     <!-- Link our CSS file -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- footer Section Ends Here -->
+    <script src="foods.js"></script>
 </head>
 
 <body>
@@ -55,10 +57,12 @@
     </section>
     <!-- fOOD sEARCH Section Ends Here -->
 
+
+    <!-- MAIN CODE TO ACCESS AND OUTPUT EACH ITEM -->
 <?php
 $user = 'root';
 $pass='';
-$database = 'proj';
+$database = 'online_orders';
 
 $db = new mysqli('localhost', $user, $pass, $database) or die("NO connection");
 
@@ -77,6 +81,7 @@ $db = new mysqli('localhost', $user, $pass, $database) or die("NO connection");
 ?>
 
 
+    <!-- MAIN CODE TO ACCESS AND OUTPUT EACH ITEM -->
     <!-- fOOD MEnu Section Starts Here -->
     <section class="food-menu">
         <div class="container">
@@ -99,133 +104,16 @@ $db = new mysqli('localhost', $user, $pass, $database) or die("NO connection");
                         '</p>
                         <br>
 
-                        <a href="#" class="btn btn-primary" name='.$obj->foodDescription.'>Order Now</a>
+                        <span onclick="cartMake('.$obj->mid.')" class="btn btn-primary" id='.$obj->mid.'>Order</span>
+                        <span class="btn btn-primary" style="visibility:hidden;" id="add'.$obj->mid.'">+</span>
+                        <span class="btn btn-primary" style="visibility:hidden;" id="subtract'.$obj->mid.'">-</span>
                     </div>
                 </div>';}}
                  $res -> free_result(); ?>
 
 
 
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="images/menu-pizza.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
-                </div>
-
-                <div class="food-menu-desc">
-                    <h4>Food Title</h4>
-                    <p class="food-price">$2.3</p>
-                    <p class="food-detail">
-                        Made with Italian Sauce, Chicken, and organice vegetables.
-                    </p>
-                    <br>
-
-                    <a href="#" class="btn btn-primary" >Order Now</a>
-                </div>
-            </div>
-
-
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="images/menu-pizza.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
-                </div>
-
-                <div class="food-menu-desc">
-                    <h4>Food Title</h4>
-                    <p class="food-price">$2.3</p>
-                    <p class="food-detail">
-                        Made with Italian Sauce, Chicken, and organice vegetables.
-                    </p>
-                    <br>
-
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
-
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="images/menu-burger.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
-                </div>
-
-                <div class="food-menu-desc">
-                    <h4>Smoky Burger</h4>
-                    <p class="food-price">$2.3</p>
-                    <p class="food-detail">
-                        Made with Italian Sauce, Chicken, and organice vegetables.
-                    </p>
-                    <br>
-
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
-
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="images/menu-burger.jpg" alt="Chicke Hawain Burger" class="img-responsive img-curve">
-                </div>
-
-                <div class="food-menu-desc">
-                    <h4>Nice Burger</h4>
-                    <p class="food-price">$2.3</p>
-                    <p class="food-detail">
-                        Made with Italian Sauce, Chicken, and organice vegetables.
-                    </p>
-                    <br>
-
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
-
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="images/menu-pizza.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
-                </div>
-
-                <div class="food-menu-desc">
-                    <h4>Food Title</h4>
-                    <p class="food-price">$2.3</p>
-                    <p class="food-detail">
-                        Made with Italian Sauce, Chicken, and organice vegetables.
-                    </p>
-                    <br>
-
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
-
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="images/menu-pizza.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
-                </div>
-
-                <div class="food-menu-desc">
-                    <h4>Food Title</h4>
-                    <p class="food-price">$2.3</p>
-                    <p class="food-detail">
-                        Made with Italian Sauce, Chicken, and organice vegetables.
-                    </p>
-                    <br>
-
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
-
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="images/menu-momo.jpg" alt="Chicke Hawain Momo" class="img-responsive img-curve">
-                </div>
-
-                <div class="food-menu-desc">
-                    <h4>Chicken Steam Momo</h4>
-                    <p class="food-price">$2.3</p>
-                    <p class="food-detail">
-                        Made with Italian Sauce, Chicken, and organice vegetables.
-                    </p>
-                    <br>
-
-                    <a href="#" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
-
+           
 
             <div class="clearfix"></div>
 
@@ -260,7 +148,8 @@ $db = new mysqli('localhost', $user, $pass, $database) or die("NO connection");
             <p>All rights reserved. Designed By <a href="#">Vijay Thapa</a></p>
         </div>
     </section>
-    <!-- footer Section Ends Here -->
+
 
 </body>
+
 </html>

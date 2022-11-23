@@ -54,7 +54,7 @@
 <?php
 $user = 'root';
 $pass='';
-$database = 'proj';
+$database = 'online_orders';
 
 $db = new mysqli('localhost', $user, $pass, $database) or die("NO connection");
 
