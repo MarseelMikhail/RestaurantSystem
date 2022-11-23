@@ -99,7 +99,7 @@ $db = new mysqli('localhost', $user, $pass, $database) or die("NO connection");
                         '</p>
                         <br>
 
-                        <a href="#" class="btn btn-primary">Order Now</a>
+                        <a href="#" class="btn btn-primary" name='.$obj->foodDescription.'>Order Now</a>
                     </div>
                 </div>';}}
                  $res -> free_result(); ?>
@@ -119,7 +119,7 @@ $db = new mysqli('localhost', $user, $pass, $database) or die("NO connection");
                     </p>
                     <br>
 
-                    <a href="#" class="btn btn-primary">Order Now</a>
+                    <a href="#" class="btn btn-primary" >Order Now</a>
                 </div>
             </div>
 
