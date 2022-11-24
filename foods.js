@@ -4,9 +4,9 @@ var cart = document.getElementById("carto");
 
 
 cart.addEventListener("click",function(){ 
-    var input =  '<?php $sql= "INSERT INTO order_details(id,mid,oid,quantity,item_total) VALUES (2,1,2'+food_dict['1']+'100) ";$res = $db->query($sql); ?>'
+    var input =  '<?= "INSERT INTO order_details(id,mid,oid,quantity,item_total) VALUES (2,1,2'+food_dict['1']+'100) ";$res = $db->query($sql); ?>;'
 
-    cart.innerHTML = input;
+    alert(input);
 
 })
 
