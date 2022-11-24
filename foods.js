@@ -4,9 +4,10 @@ var cart = document.getElementById("carto");
 
 
 cart.addEventListener("click",function(){ 
-    var input =  '<?= "INSERT INTO order_details(id,mid,oid,quantity,item_total) VALUES (2,1,2'+food_dict['1']+'100) ";$res = $db->query($sql); ?>;'
+    console.log(food_dict);
+    var input =  '<?= "INSERT INTO order_details(id,mid,oid,quantity,item_total) VALUES (2,1,2,'+food_dict[1]+',100) ";$res = $db->query($sql); ?>;'
 
-    alert(input);
+    alert(Object.keys(food_dict).length);
 
 })
 
@@ -44,12 +45,15 @@ function cartMake(but)
 function cartProcess(ID,count)
 {
     //show cart or no
-
+    if(document.getElementById(ID).textContent != 'Order')
+    food_dict[ID] = parseInt(document.getElementById(ID).textContent);
+    else
+    delete food_dict[ID];
     total = total+count;
     if(total>0)
         cart.style.visibility = "visible";
     else
         cart.style.visibility = "hidden";
-    food_dict[ID] = parseInt(document.getElementById(ID));
+    
 }
 
