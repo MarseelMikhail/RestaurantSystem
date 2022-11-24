@@ -3,6 +3,16 @@ var food_dict = {};
 var cart = document.getElementById("carto");
 
 
+cart.addEventListener("click",function(){ 
+    var input =  '<?php $sql= "INSERT INTO order_details(id,mid,oid,quantity,item_total) VALUES (2,1,2'+food_dict['1']+'100) ";$res = $db->query($sql); ?>'
+
+    cart.innerHTML = input;
+
+})
+
+
+
+
 function cartMake(but)
 {
    var item = document.getElementById(but);
@@ -35,8 +45,6 @@ function cartProcess(ID,count)
 {
     //show cart or no
 
-
-
     total = total+count;
     if(total>0)
         cart.style.visibility = "visible";
@@ -44,11 +52,4 @@ function cartProcess(ID,count)
         cart.style.visibility = "hidden";
     food_dict[ID] = parseInt(document.getElementById(ID));
 }
-
-cart.addEventListener("click",function(){ 
-    $.ajax(
-        {url:"cart.php", method:"post",data: food_dict,success: function(res){console.log(res);}}
-    )
-    
-    });
 
