@@ -54,11 +54,9 @@
 
 
 
-<?php
-$foods = json_decode($_POST);
-foreach($foods as $food)
-    echo $food->ID;
-?>
+
+    <script src="foods.js">cartDisplay();</script>
+
 <?php
 // $sql= "SELECT * FROM menu";
 // $res = $db->query($sql);
@@ -117,5 +115,5 @@ foreach($foods as $food)
     <!-- footer Section Ends Here -->
 
 </body>
-<script src="foods.js"></script>
+
 </html>

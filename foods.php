@@ -84,7 +84,7 @@ $db = new mysqli('localhost', $user, $pass, $database) or die("NO connection");
     <!-- fOOD MEnu Section Starts Here -->
     <section class="food-menu">
         <div class="container">
-        <span><h2 class="text-center">Food Menu</h2></span><a href="cart.php"><span class="btn btn-primary" style="visibility:hidden; position:fixed;" id="carto">Cart</span></a>
+        <span><h2 class="text-center">Food Menu</h2></span>  <span class="btn btn-primary" style="visibility:hidden; position:fixed;" id="carto">Cart</span>
         <?php
             $sql= "SELECT * FROM menu";
             $res = $db->query($sql);
