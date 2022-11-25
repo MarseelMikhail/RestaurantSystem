@@ -4,17 +4,10 @@ var cart = document.getElementById("carto");
 
 
 cart.addEventListener("click",function(){ 
-<<<<<<< HEAD
     var input =  '<?= "INSERT INTO order_details(id,mid,oid,quantity,item_total) VALUES (2,1,2'+food_dict['1']+'100) ";$res = $db->query($sql); ?>;'
 
     localStorage.setItem('sql_line',input);
     console.log(localStorage.getItem('sql_line'));
-=======
-    console.log(food_dict);
-    var input =  '<?= "INSERT INTO order_details(id,mid,oid,quantity,item_total) VALUES (2,1,2,'+food_dict[1]+',100) ";$res = $db->query($sql); ?>;'
-
-    alert(Object.keys(food_dict).length);
->>>>>>> d12e67b6c901baaf3a2a01f5e1a9ec86460af877
 
 })
 

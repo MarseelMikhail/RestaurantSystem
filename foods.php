@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <meta charset="UTF-8">
     <!-- Important to make website responsive -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurant Website</title>
 
+
     <!-- Link our CSS file -->
     <link rel="stylesheet" href="css/style.css">
 
 </head>
+
+
 
 <body>
     <!-- Navbar Section Starts Here -->
@@ -59,6 +63,7 @@
 
     <!-- MAIN CODE TO ACCESS AND OUTPUT EACH ITEM -->
 <?php
+
 $user = 'root';
 $pass='';
 $database = 'online_orders';
@@ -84,11 +89,7 @@ $db = new mysqli('localhost', $user, $pass, $database) or die("NO connection");
     <!-- fOOD MEnu Section Starts Here -->
     <section class="food-menu">
         <div class="container">
-<<<<<<< HEAD
         <span><h2 class="text-center">Food Menu</h2></span>  <span class="btn btn-primary" style="visibility:hidden; position:fixed;" id="carto">Cart</span>
-=======
-        <span><h2 class="text-center">Food Menu</h2></span><span class="btn btn-primary" style="visibility:hidden; position:fixed;" id="carto">Cart</span>
->>>>>>> d12e67b6c901baaf3a2a01f5e1a9ec86460af877
         <?php
             $sql= "SELECT * FROM menu";
             $res = $db->query($sql);
@@ -114,7 +115,17 @@ $db = new mysqli('localhost', $user, $pass, $database) or die("NO connection");
                 </div>';}}
                  $res -> free_result(); ?>
 
-
+<script>    var emp = {};
+    emp.name = "kk";
+    emp.case=2;
+    $.ajax({
+        url: 'config.php',
+        type: 'post',
+        data: emp,
+        success: function(response){console.log('success2');
+            //do whatever.
+        }
+    });</script>
 
            
 
