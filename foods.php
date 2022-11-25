@@ -2,15 +2,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <meta charset="UTF-8">
     <!-- Important to make website responsive -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurant Website</title>
 
+
     <!-- Link our CSS file -->
     <link rel="stylesheet" href="css/style.css">
 
 </head>
+
+
 
 <body>
     <!-- Navbar Section Starts Here -->
@@ -60,6 +64,7 @@
 
     <!-- MAIN CODE TO ACCESS AND OUTPUT EACH ITEM -->
 <?php
+
 $user = 'root';
 $pass='';
 $database = 'online_orders';
@@ -116,7 +121,17 @@ $_SESSION['q'] = "a";
                 </div>';}}
                  $res -> free_result(); ?>
 
-
+<script>    var emp = {};
+    emp.name = "kk";
+    emp.case=2;
+    $.ajax({
+        url: 'config.php',
+        type: 'post',
+        data: emp,
+        success: function(response){console.log('success2');
+            //do whatever.
+        }
+    });</script>
 
            
 

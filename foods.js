@@ -5,8 +5,7 @@ var save = document.getElementById("store");
 
 
 cart.addEventListener("click",function(){ 
-    console.log(food_dict);
-    var input =  '<?= "INSERT INTO order_details(id,mid,oid,quantity,item_total) VALUES (2,1,2,'+food_dict[1]+',100) ";$res = $db->query($sql); ?>;'
+    var input =  '<?= "INSERT INTO order_details(id,mid,oid,quantity,item_total) VALUES (2,1,2'+food_dict['1']+'100) ";$res = $db->query($sql); ?>;'
 
     save.setAttribute('value','2');
     console.log('NEWW');
