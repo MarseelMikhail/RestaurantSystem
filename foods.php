@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,17 +75,22 @@ $db = new mysqli('localhost', $user, $pass, $database) or die("NO connection");
 //    while ($obj = $res -> fetch_object()) {
 //     printf("%s (%s)\n", $obj->foodName, $obj->foodPrice);
 //   }
- 
-
+session_start();
+$_SESSION['q'] = "a";
 // }
 ?>
 
 
     <!-- MAIN CODE TO ACCESS AND OUTPUT EACH ITEM -->
     <!-- fOOD MEnu Section Starts Here -->
+    <form  method="POST">
+<input   type="text" name="store" value="0" id="store" >
+</form>
+
+
     <section class="food-menu">
         <div class="container">
-        <span><h2 class="text-center">Food Menu</h2></span><span class="btn btn-primary" style="visibility:hidden; position:fixed;" id="carto">Cart</span>
+        <span><h2 class="text-center">Food Menu</h2></span><a href="cart.php"><span class="btn btn-primary" style="visibility:hidden; position:fixed;" id="carto">Cart</span></a>
         <?php
             $sql= "SELECT * FROM menu";
             $res = $db->query($sql);
@@ -122,6 +128,7 @@ $db = new mysqli('localhost', $user, $pass, $database) or die("NO connection");
 
     </section>
     <!-- fOOD Menu Section Ends Here -->
+
 
     <!-- social Section Starts Here -->
     <section class="social">

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,9 +55,14 @@
     <!-- fOOD sEARCH Section Ends Here -->
 
 
-
-
-    <script src="foods.js">cartDisplay();</script>
+    <?php 
+ session_start();
+$obj = $_SESSION['q'];
+ var_dump($obj);
+  
+ 
+      // do whatever we want with the users array.
+   ?>
 
 <?php
 // $sql= "SELECT * FROM menu";
