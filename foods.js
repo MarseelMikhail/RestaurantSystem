@@ -45,14 +45,10 @@ function cartMake(but)
 function cartProcess(ID,count)
 {
     //show cart or no
-<<<<<<< HEAD
-
-=======
     if(document.getElementById(ID).textContent != 'Order')
     food_dict[ID] = parseInt(document.getElementById(ID).textContent);
     else
     delete food_dict[ID];
->>>>>>> d12e67b6c901baaf3a2a01f5e1a9ec86460af877
     total = total+count;
     if(total>0)
         cart.style.visibility = "visible";

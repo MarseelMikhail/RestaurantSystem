@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,26 +54,29 @@
     </section>
     <!-- fOOD sEARCH Section Ends Here -->
 
+    <!-------------------------------------------------------------------------------------------------------------------------->
+    <!-------------------------------------- MAIN BODY ------------------------------------------------------------------------->
+
+    <!-------------------------------------------------------------------------------------------------------------------------->
+    
+    <!-------------------------------------------------------------------------------------------------------------------------->
 
 
+    
 
-    <script src="foods.js">cartDisplay();</script>
 
+    <!-- MAIN CODE TO ACCESS AND OUTPUT EACH ITEM -->
 <?php
-// $sql= "SELECT * FROM menu";
-// $res = $db->query($sql);
-// if($res==True)
-// {
-//    while ($obj = $res -> fetch_object()) {
-//     printf("%s (%s)\n", $obj->foodName, $obj->foodPrice);
-//   }
- 
+$user = 'root';
+$pass='';
+$database = 'online_orders';
 
-// }
+$db = new mysqli('localhost', $user, $pass, $database) or die("NO connection");
+
 ?>
 
 
-    <!-- fOOD MEnu Section Starts Here -->
+    <!-- fOOD cart Section Starts Here -->
     <section class="food-menu">
         <div class="container">
         <h2 class="text-center"></h2>
@@ -87,7 +91,43 @@
         </div>
 
     </section>
-    <!-- fOOD Menu Section Ends Here -->
+
+    <?php
+
+   if(isset($_POST)){print_r("HI");
+      $data = file_get_contents("php://input");
+      $user = json_decode($data, true);
+      print_r($user);
+      // do whatever we want with the users array.
+   }else {print_r("bye");
+   }
+    
+
+           
+
+            $res = $db->query($sql);
+            if($res==True){
+            while ($obj = $res -> fetch_object()) {
+                echo '
+                <div class="food-menu-box">
+                    <div class="food-menu-img">
+                        <img src="images/menu-pizza.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
+                    </div>
+
+                    <div class="food-menu-desc">
+                        <h4>'.$obj->foodName.'</h4>
+                        <p class="food-price">'.$obj->foodPrice.'</p>
+                        <p class="food-detail">'.$obj->foodDescription.
+                        '</p>
+                        <br>
+
+                        <span onclick="cartMake('.$obj->mid.')" class="btn btn-primary" id='.$obj->mid.'>Order</span>
+                        <span class="btn btn-primary" style="visibility:hidden;" id="add'.$obj->mid.'">+</span>
+                        <span class="btn btn-primary" style="visibility:hidden;" id="subtract'.$obj->mid.'">-</span>
+                    </div>
+                </div>';}}
+                 $res -> free_result(); ?>
+    <!-- fOOD cart Section Ends Here -->
 
     <!-- social Section Starts Here -->
     <section class="social">
