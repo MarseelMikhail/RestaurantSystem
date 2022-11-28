@@ -7,9 +7,10 @@ var save = document.getElementById("store");
 cart.addEventListener("click",function(){ 
     var input =  '<?= "INSERT INTO order_details(id,mid,oid,quantity,item_total) VALUES (2,1,2'+food_dict['1']+'100) ";$res = $db->query($sql); ?>;'
 
-    save.setAttribute('value','2');
+    
     console.log('NEWW');
-
+    sessionStorage.setItem("naam", "kaam");
+alert("2");
 })
 
 
@@ -22,22 +23,29 @@ function cartMake(but)
    var minus = document.getElementById("subtract"+but);
    console.log(item.textContent+but);
    if(item.textContent=='Order')
-   {item.innerHTML = "1";
+   {
+    item.innerHTML = "1";
+   
     plus.style.visibility = "visible";  minus.style.visibility = "visible";
     cartProcess(but,1);
+    save.setAttribute('value',JSON.stringify(food_dict));
+    
     
     }
    
     plus.addEventListener("click",function(){ 
-        item = document.getElementById(but); item.innerHTML = parseInt(item.textContent)+1; cartProcess(but,1);});
+        
+        item = document.getElementById(but); item.innerHTML = parseInt(item.textContent)+1; cartProcess(but,1); save.setAttribute('value',JSON.stringify(food_dict));});
 
     minus.addEventListener("click",function(){ 
+        
         item = document.getElementById(but); 
         if(parseInt(item.textContent)>1) 
         
         item.innerHTML = parseInt(item.textContent)-1;
         else if(parseInt(item.textContent)==1) {item.innerHTML = "Order"; plus.style.visibility = "hidden";  minus.style.visibility = "hidden";}
-        cartProcess(but,-1);})
+        cartProcess(but,-1); save.setAttribute('value',JSON.stringify(food_dict));})
+
    
 }
 
@@ -46,6 +54,7 @@ function cartMake(but)
 function cartProcess(ID,count)
 {
     //show cart or no
+    
     if(document.getElementById(ID).textContent != 'Order')
     food_dict[ID] = parseInt(document.getElementById(ID).textContent);
     else

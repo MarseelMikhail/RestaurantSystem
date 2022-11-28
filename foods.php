@@ -1,4 +1,4 @@
-
+<?php   session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,6 +72,15 @@ $database = 'online_orders';
 $db = new mysqli('localhost', $user, $pass, $database) or die("NO connection");
 
 ?>
+
+    <!-- MAIN CODE TO ACCESS AND OUTPUT EACH ITEM -->
+    <!-- fOOD MEnu Section Starts Here -->
+
+    <form method="post" action="cart.php?action=dic&id='.$obj->mid.'">
+<input   type="hidden" name="store" value="1" id="store" />
+<input name="dic" type = "submit" />
+</form>
+
 <?php
 // $sql= "SELECT * FROM menu";
 // $res = $db->query($sql);
@@ -80,29 +89,24 @@ $db = new mysqli('localhost', $user, $pass, $database) or die("NO connection");
 //    while ($obj = $res -> fetch_object()) {
 //     printf("%s (%s)\n", $obj->foodName, $obj->foodPrice);
 //   }
-session_start();
-$_SESSION['q'] = "a";
-// }
+
 ?>
 
-
-    <!-- MAIN CODE TO ACCESS AND OUTPUT EACH ITEM -->
-    <!-- fOOD MEnu Section Starts Here -->
-    <form  method="POST">
-<input   type="text" name="store" value="0" id="store" >
-</form>
 
 
     <section class="food-menu">
         <div class="container">
         <span><h2 class="text-center">Food Menu</h2></span><a href="cart.php"><span class="btn btn-primary" style="visibility:hidden; position:fixed;" id="carto">Cart</span></a>
         <?php
+      
             $sql= "SELECT * FROM menu";
             $res = $db->query($sql);
             if($res==True){
             while ($obj = $res -> fetch_object()) {
                 echo '
                 <div class="food-menu-box">
+                <form method="post" action="cart.php?action=add&id='.$obj->mid.'">
+              
                     <div class="food-menu-img">
                         <img src="images/menu-pizza.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
                     </div>
@@ -113,27 +117,33 @@ $_SESSION['q'] = "a";
                         <p class="food-detail">'.$obj->foodDescription.
                         '</p>
                         <br>
-
-                        <span onclick="cartMake('.$obj->mid.')" class="btn btn-primary" id='.$obj->mid.'>Order</span>
-                        <span class="btn btn-primary" style="visibility:hidden;" id="add'.$obj->mid.'">+</span>
-                        <span class="btn btn-primary" style="visibility:hidden;" id="subtract'.$obj->mid.'">-</span>
+                        Quantity: <input type="number" min="1" 
+                        max="25" 
+                        name="quantity" class="form-control" value="1" style="width: 60px;">
+                        <span onclick="cartMake('.$obj->mid.')" name="quantity1"  class="btn btn-primary" id='.$obj->mid.'>Order</span>
+                        <span class="btn btn-primary" style="visibility:hidden;" name="change" id="add'.$obj->mid.'">+</span>
+                        <span class="btn btn-primary" style="visibility:hidden;" name="change" id="subtract'.$obj->mid.'">-</span>
+            
+                        <input 
+                        type="hidden" name="item_name" value="'.$obj->foodName.'">
+                        <input 
+                        type="hidden" name="item_price" value="'.$obj->foodPrice.'">
+                        <input 
+                        type="hidden" name="item_id" value="'.$obj->mid.'">
+                        <input 
+type="submit" name="add" style="margin-top:5px;" class="btn btn-success" value="Add to Cart">
                     </div>
+                    </form>
                 </div>';}}
-                 $res -> free_result(); ?>
+    
+                 
 
-<script>    var emp = {};
-    emp.name = "kk";
-    emp.case=2;
-    $.ajax({
-        url: 'config.php',
-        type: 'post',
-        data: emp,
-        success: function(response){console.log('success2');
-            //do whatever.
-        }
-    });</script>
+                 
+                 
+                 
+                 
+                 ?>
 
-           
 
             <div class="clearfix"></div>
 

@@ -60,15 +60,8 @@
     <!-------------------------------------------------------------------------------------------------------------------------->
     
     <!-------------------------------------------------------------------------------------------------------------------------->
-
-    <?php 
- session_start();
-$obj = $_SESSION['q'];
- var_dump($obj);
-  
- 
-      // do whatever we want with the users array.
-   ?>
+<div id='put'> </div>
+   
 
     <!-- MAIN CODE TO ACCESS AND OUTPUT EACH ITEM -->
 <?php
@@ -96,42 +89,103 @@ $db = new mysqli('localhost', $user, $pass, $database) or die("NO connection");
         </div>
 
     </section>
-
+    <div>
     <?php
 
-   if(isset($_POST)){print_r("HI");
-      $data = file_get_contents("php://input");
-      $user = json_decode($data, true);
-      print_r($user);
-      // do whatever we want with the users array.
-   }else {print_r("bye");
-   }
-    
+session_start();
 
-           
+if(isset($_POST["dic"]))
+print_r($_POST["store"]);
+                 
+if(isset($_POST["add"])){
+    if(isset($_SESSION["cart"])){
+        $item_array_id = array_column($_SESSION["cart"], "food_id");
+        if(!in_array($_GET["id"], $item_array_id)){
+            $count = count($_SESSION["cart"]);
+            $item_array = array(
+                'food_id' => $_GET["id"],
+                'item_name' => $_POST["item_name"],
+                'item_price' => $_POST["item_price"],
+                'item_id' => $_POST["item_id"],
+                'item_quantity' => $_POST["quantity"]
+            );
+            $_SESSION["cart"][$count] = $item_array;
 
-            $res = $db->query($sql);
-            if($res==True){
-            while ($obj = $res -> fetch_object()) {
-                echo '
-                <div class="food-menu-box">
-                    <div class="food-menu-img">
-                        <img src="images/menu-pizza.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
-                    </div>
+        } else {					
+            echo '<script>window.location="cart.php"</script>';
+        }
+    } else {
+        $item_array = array(
+            'food_id' => $_GET["id"],
+            'item_name' => $_POST["item_name"],
+            'item_price' => $_POST["item_price"],
+            'item_id' => $_POST["item_id"],
+            'item_quantity' => $_POST["quantity"]
+        );
+        $_SESSION["cart"][0] = $item_array;
+    }
+}
+if(!empty($_SESSION["cart"])){
+?>      
+	<h3>Your Cart</h3>    
+	<table class="table table-striped">
+	 <thead class="thead-dark">
+	<tr>
+	<th width="40%">Food Name</th>
+	<th width="10%">Quantity</th>
+	<th width="20%">Price Details</th>
+	<th width="15%">Order Total</th>
+	<th width="5%">Action</th>
+	</tr>
+	</thead>
+	<?php
+	$total = 0;
+	foreach($_SESSION["cart"] as $keys => $values){
+	?>
+		<tr>
+		<td><?php echo $values["item_name"]; ?></td>
+		<td><?php echo $values["item_quantity"] ?></td>
+		<td>$<?php echo $values["item_price"]; ?></td>
+		<td>$<?php echo number_format($values["item_quantity"] * 
+$values["item_price"], 2); ?></td>
+		<td><a href="cart.php?action=delete&id=<?php 
+echo $values["food_id"]; ?>"><span 
+class="text-danger">Remove</span></a></td>
+		</tr>
+		<?php 
+		$total = $total + ($values["item_quantity"] * $values["item_price"]);
+	}
+	?>
+	<tr>
+	<td colspan="3" align="right">Total</td>
+	<td align="right">$<?php echo number_format($total, 2); ?></td>
+	<td></td>
+	</tr>
+	</table>
+	<?php
+	echo '<a href="cart.php?action=empty"><button class="btn btn-danger"><span 
+class="glyphicon glyphicon-trash"></span> 
+Empty Cart</button></a> <a 
+href="index.php"><button 
+class="btn btn-warning">Add more items</button></a> <a 
+href="checkout.php"><button 
+class="btn btn-success pull-right"><span 
+class="glyphicon glyphicon-share-alt"></span> Check Out</button></a>';
+	?>
+<?php
+} elseif(empty($_SESSION["cart"])){
+?>
+	<div class="container">
+	<div class="jumbotron">
+	<h3>Your cart is empty. Enjoy <a href="foods.php">food list</a> here.</h3>        
+	</div>      
+	</div>    
+<?php
+}
 
-                    <div class="food-menu-desc">
-                        <h4>'.$obj->foodName.'</h4>
-                        <p class="food-price">'.$obj->foodPrice.'</p>
-                        <p class="food-detail">'.$obj->foodDescription.
-                        '</p>
-                        <br>
-
-                        <span onclick="cartMake('.$obj->mid.')" class="btn btn-primary" id='.$obj->mid.'>Order</span>
-                        <span class="btn btn-primary" style="visibility:hidden;" id="add'.$obj->mid.'">+</span>
-                        <span class="btn btn-primary" style="visibility:hidden;" id="subtract'.$obj->mid.'">-</span>
-                    </div>
-                </div>';}}
-                 $res -> free_result(); ?>
+unset($_SESSION['cart']); 
+?>		
+</div>
     <!-- fOOD cart Section Ends Here -->
 
     <!-- social Section Starts Here -->
