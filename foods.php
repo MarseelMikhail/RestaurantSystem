@@ -65,21 +65,13 @@
     <!-- MAIN CODE TO ACCESS AND OUTPUT EACH ITEM -->
 <?php
 
-$user = 'root';
-$pass='';
-$database = 'online_orders';
-
-$db = new mysqli('localhost', $user, $pass, $database) or die("NO connection");
+include 'connect.php';
 
 ?>
 
     <!-- MAIN CODE TO ACCESS AND OUTPUT EACH ITEM -->
     <!-- fOOD MEnu Section Starts Here -->
 
-    <form method="post" action="cart.php?action=dic&id='.$obj->mid.'">
-<input   type="hidden" name="store" value="1" id="store" />
-<input name="dic" type = "submit" />
-</form>
 
 <?php
 // $sql= "SELECT * FROM menu";
@@ -94,9 +86,19 @@ $db = new mysqli('localhost', $user, $pass, $database) or die("NO connection");
 
 
 
+
+
+<!-- SEND DATA TO NEXT PAGE -->
+    <form method="post" action="cart.php?action=dic&id='.$obj->mid.'">
+<input   type="hidden" name="store" value="0" id="store" />
+<input class="btn btn-primary" style="margin-left:75%; visibility:hidden; position:fixed;" id="carto" name="dic" type = "submit" value='cart' />
+</form>
+                                    <!-- ################################################################# -->
+
+
     <section class="food-menu">
         <div class="container">
-        <span><h2 class="text-center">Food Menu</h2></span><a href="cart.php"><span class="btn btn-primary" style="visibility:hidden; position:fixed;" id="carto">Cart</span></a>
+       
         <?php
       
             $sql= "SELECT * FROM menu";
@@ -105,7 +107,7 @@ $db = new mysqli('localhost', $user, $pass, $database) or die("NO connection");
             while ($obj = $res -> fetch_object()) {
                 echo '
                 <div class="food-menu-box">
-                <form method="post" action="cart.php?action=add&id='.$obj->mid.'">
+                <form method="post" action="cart.php?action=add&id=<?php echo $obj->mid;?>">
               
                     <div class="food-menu-img">
                         <img src="images/menu-pizza.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">

@@ -64,14 +64,6 @@
    
 
     <!-- MAIN CODE TO ACCESS AND OUTPUT EACH ITEM -->
-<?php
-$user = 'root';
-$pass='';
-$database = 'online_orders';
-
-$db = new mysqli('localhost', $user, $pass, $database) or die("NO connection");
-
-?>
 
 
     <!-- fOOD cart Section Starts Here -->
@@ -92,69 +84,69 @@ $db = new mysqli('localhost', $user, $pass, $database) or die("NO connection");
     <div>
     <?php
 
+include 'connect.php';
 session_start();
 
-if(isset($_POST["dic"]))
-print_r($_POST["store"]);
-                 
-if(isset($_POST["add"])){
-    if(isset($_SESSION["cart"])){
-        $item_array_id = array_column($_SESSION["cart"], "food_id");
-        if(!in_array($_GET["id"], $item_array_id)){
-            $count = count($_SESSION["cart"]);
-            $item_array = array(
-                'food_id' => $_GET["id"],
-                'item_name' => $_POST["item_name"],
-                'item_price' => $_POST["item_price"],
-                'item_id' => $_POST["item_id"],
-                'item_quantity' => $_POST["quantity"]
-            );
-            $_SESSION["cart"][$count] = $item_array;
+// // if(isset($_SESSION["cart"])){
+// // print_r('HIII');
+    
+// //             } else {					
+// //                 echo '<script>window.location="cart.php"</script>';
+//             }
+//         } else {
 
-        } else {					
-            echo '<script>window.location="cart.php"</script>';
-        }
-    } else {
-        $item_array = array(
-            'food_id' => $_GET["id"],
-            'item_name' => $_POST["item_name"],
-            'item_price' => $_POST["item_price"],
-            'item_id' => $_POST["item_id"],
-            'item_quantity' => $_POST["quantity"]
-        );
-        $_SESSION["cart"][0] = $item_array;
-    }
-}
-if(!empty($_SESSION["cart"])){
-?>      
-	<h3>Your Cart</h3>    
-	<table class="table table-striped">
-	 <thead class="thead-dark">
-	<tr>
-	<th width="40%">Food Name</th>
-	<th width="10%">Quantity</th>
-	<th width="20%">Price Details</th>
-	<th width="15%">Order Total</th>
-	<th width="5%">Action</th>
-	</tr>
-	</thead>
-	<?php
-	$total = 0;
-	foreach($_SESSION["cart"] as $keys => $values){
-	?>
+    if(isset($_POST["dic"]))
+{
+      print_r($_POST["store"]);
+      $decode = json_decode($_POST["store"],true);
+      $total = 0;
+      echo '<h3>Your Cart</h3>' ; 
+      ?>
+    <table class="table table-striped">
+    <thead class="thead-dark">
+     <tr>
+     <th width="40%">Food Name</th>
+     <th width="10%">Quantity</th>
+     <th width="20%">Price Details</th>
+     <th width="15%">Order Total</th>
+     <th width="5%">Action</th>
+     </tr>
+     </thead>
+     <?php
+     
+            foreach($decode as $id => $quan)
+            {
+                $temp = $decode;
+                $sql= "SELECT * FROM menu WHERE mid=".$id;
+                $res = $db->query($sql);
+                if($res==True)
+                {
+                    
+                  
+                while ($obj = $res -> fetch_object())
+                    {print_r($obj); 
+                        
+                        echo '<br><br>';
+                    ?>
+
+  
+
+
 		<tr>
-		<td><?php echo $values["item_name"]; ?></td>
-		<td><?php echo $values["item_quantity"] ?></td>
-		<td>$<?php echo $values["item_price"]; ?></td>
-		<td>$<?php echo number_format($values["item_quantity"] * 
-$values["item_price"], 2); ?></td>
-		<td><a href="cart.php?action=delete&id=<?php 
-echo $values["food_id"]; ?>"><span 
-class="text-danger">Remove</span></a></td>
+		<td><?php echo $obj->foodName; ?></td>
+		<td><?php echo $quan?></td>
+		<td>$<?php echo $obj->foodPrice; ?></td>
+		<td>$<?php echo number_format($quan * 
+$obj->foodPrice, 2); ?></td>
+		<td><form method="post" action="cart.php?action=dic">
+<input   type="hidden" name="store" value=<?php unset($temp[$obj->mid]); echo json_encode($temp); ?> id="store" />
+<input class="btn btn-primary" id="del" name="dic" type = "submit" value='Remove' />
+</form>
+</td>
 		</tr>
 		<?php 
-		$total = $total + ($values["item_quantity"] * $values["item_price"]);
-	}
+		$total = $total + ($quan * $obj->foodPrice);
+	}}}
 	?>
 	<tr>
 	<td colspan="3" align="right">Total</td>
@@ -162,6 +154,47 @@ class="text-danger">Remove</span></a></td>
 	<td></td>
 	</tr>
 	</table>
+
+                    <?php 
+                
+            }
+            
+?>		
+          
+
+
+    <?php             
+// if(isset($_POST["add"])){
+//     if(isset($_SESSION["cart"])){
+//         $item_array_id = array_column($_SESSION["cart"], "food_id");
+//         if(!in_array($_GET["id"], $item_array_id)){
+//             $count = count($_SESSION["cart"]);
+//             $item_array = array(
+//                 'food_id' => $_GET["id"],
+//                 'item_name' => $_POST["item_name"],
+//                 'item_price' => $_POST["item_price"],
+//                 'item_id' => $_POST["item_id"],
+//                 'item_quantity' => $_POST["quantity"]
+//             );
+//             $_SESSION["cart"][$count] = $item_array;
+
+//         } else {					
+//             echo '<script>window.location="cart.php"</script>';
+//         }
+//     } else {
+//         $item_array = array(
+//             'food_id' => $_GET["id"],
+//             'item_name' => $_POST["item_name"],
+//             'item_price' => $_POST["item_price"],
+//             'item_id' => $_POST["item_id"],
+//             'item_quantity' => $_POST["quantity"]
+//         );
+//         $_SESSION["cart"][0] = $item_array;
+//     }
+// }
+?>
+
+
 	<?php
 	echo '<a href="cart.php?action=empty"><button class="btn btn-danger"><span 
 class="glyphicon glyphicon-trash"></span> 
@@ -171,20 +204,10 @@ class="btn btn-warning">Add more items</button></a> <a
 href="checkout.php"><button 
 class="btn btn-success pull-right"><span 
 class="glyphicon glyphicon-share-alt"></span> Check Out</button></a>';
-	?>
-<?php
-} elseif(empty($_SESSION["cart"])){
 ?>
-	<div class="container">
-	<div class="jumbotron">
-	<h3>Your cart is empty. Enjoy <a href="foods.php">food list</a> here.</h3>        
-	</div>      
-	</div>    
-<?php
-}
 
-unset($_SESSION['cart']); 
-?>		
+
+
 </div>
     <!-- fOOD cart Section Ends Here -->
 
