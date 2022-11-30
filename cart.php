@@ -95,10 +95,14 @@ session_start();
 //             }
 //         } else {
 
-    if(isset($_POST["dic"]))
+    if(isset($_POST["dic"]) || isset($_POST["q"]))
 {
-      print_r($_POST["store"]);
+    if(isset($_POST["q"]))
+        $decode = json_decode($_POST["storeCheckout"],true);
+        else
       $decode = json_decode($_POST["store"],true);
+
+      print_r($decode);
       $total = 0;
       echo '<h3>Your Cart</h3>' ; 
       ?>
@@ -138,10 +142,15 @@ session_start();
 		<td>$<?php echo $obj->foodPrice; ?></td>
 		<td>$<?php echo number_format($quan * 
 $obj->foodPrice, 2); ?></td>
-		<td><form method="post" action="cart.php?action=dic">
+
+
+		<?php if(!isset($_POST["q"])) {?>
+        <td><form method="post" action="cart.php?action=dic">
 <input   type="hidden" name="store" value=<?php unset($temp[$obj->mid]); echo json_encode($temp); ?> id="store" />
 <input class="btn btn-primary" id="del" name="dic" type = "submit" value='Remove' />
 </form>
+<?php }?>
+
 </td>
 		</tr>
 		<?php 
@@ -158,12 +167,38 @@ $obj->foodPrice, 2); ?></td>
                     <?php 
                 
             }
+
+
+    if(isset($_POST["q"]))
+    {
+        print_r('HI HereToo'.$_POST["storeCheckout"]);
+        $sql= "INSERT INTO order_details(mid, oid, quantity, item_total) VALUES()";
+        $res = $db->query($sql);
+        if($res==True)
+        {
+
+        }
+    }
             
 ?>		
           
 
 
-    <?php             
+ <?php          
+    
+    // if(isset($_SESSION["cart"])){
+
+    //     unset($_SESSION["cart"]);
+               
+    //         } else {
+    //             $item_array = array(
+    //                 'food_id' => $_GET["id"],
+    //                 'item_name' => $_POST["item_name"],
+    //                 'item_price' => $_POST["item_price"],
+    //                 'item_id' => $_POST["item_id"],
+    //                 'item_quantity' => $_POST["quantity"]
+    //             );
+    //             $_SESSION["cart"]= $item_array;} -->
 // if(isset($_POST["add"])){
 //     if(isset($_SESSION["cart"])){
 //         $item_array_id = array_column($_SESSION["cart"], "food_id");
@@ -192,18 +227,28 @@ $obj->foodPrice, 2); ?></td>
 //         $_SESSION["cart"][0] = $item_array;
 //     }
 // }
-?>
+//?>
 
 
 	<?php
+     if(!isset($_POST["q"])) {
 	echo '<a href="cart.php?action=empty"><button class="btn btn-danger"><span 
 class="glyphicon glyphicon-trash"></span> 
-Empty Cart</button></a> <a 
+Empty Cart</button></a>
+
+<a 
 href="index.php"><button 
-class="btn btn-warning">Add more items</button></a> <a 
-href="checkout.php"><button 
-class="btn btn-success pull-right"><span 
-class="glyphicon glyphicon-share-alt"></span> Check Out</button></a>';
+class="btn btn-warning">Add more items</button></a>
+
+
+<form method="post" action="cart.php?action=q">
+<input   type="hidden" name="storeCheckout" value='.json_encode($decode).' id="store" />
+<input class="btn btn-primary" id="del" name="q" type = "submit" value="Checkout" />
+</form>';}
+
+if(isset($_POST["q"])) {
+
+}
 ?>
 
 
