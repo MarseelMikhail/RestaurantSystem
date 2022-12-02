@@ -1,4 +1,5 @@
-
+<?php session_start();
+print_r($_SESSION['uid']);?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -97,6 +98,34 @@ session_start();
 
     if(isset($_POST["dic"]) || isset($_POST["q"]))
 {
+
+    $oid = 0;
+    $sql= "SELECT oid FROM orders WHERE uid=".$_SESSION["uid"]." AND orderState=0 AND isPaid=0";
+    $res = $db->query($sql);
+    if($res==True){while ($obj = $res -> fetch_object()){
+        $sql1= "DELETE FROM order_details WHERE oid=".intval($obj->oid);
+        $sql2= "DELETE FROM orders WHERE uid=".$_SESSION["uid"]." AND orderState=0 AND isPaid=0";
+        $db->query($sql1);
+        $db->query($sql2);
+    } ;}
+    if(isset($_POST["q"]))
+    {
+
+        
+
+
+        print_r('HI HereToo'.$_POST["storeCheckout"]);
+        $sql= "INSERT INTO orders(uid,orderPlaceDate, arriveIn, orderState, orderNote, isPaid, orderedRestaurant)
+        VALUES
+        (".$_SESSION["uid"].",NOW(), '35', '0', 'none', '0', 'MCD');";
+        mysqli_query($db, $sql);
+
+
+        $sql= "SELECT oid FROM orders WHERE uid=".$_SESSION["uid"]." AND orderState=0 AND isPaid=0";
+        $res = $db->query($sql);
+        if($res==True){$obj = $res->fetch_object();$oid=$obj->oid;}
+
+    }
     if(isset($_POST["q"]))
         $decode = json_decode($_POST["storeCheckout"],true);
         else
@@ -129,7 +158,14 @@ session_start();
                   
                 while ($obj = $res -> fetch_object())
                     {print_r($obj); 
-                        
+
+
+                        if(isset($_POST["q"]))
+                        {
+                            $sql= "INSERT INTO order_details(mid, oid, quantity, item_total) VALUES(".intval($obj->mid).",".intval($oid).",".intval($quan).",".floatval(number_format($quan * 
+                            $obj->foodPrice, 2)).")";
+                            mysqli_query($db, $sql);
+                        }
                         echo '<br><br>';
                     ?>
 
@@ -169,16 +205,6 @@ $obj->foodPrice, 2); ?></td>
             }
 
 
-    if(isset($_POST["q"]))
-    {
-        print_r('HI HereToo'.$_POST["storeCheckout"]);
-        $sql= "INSERT INTO order_details(mid, oid, quantity, item_total) VALUES()";
-        $res = $db->query($sql);
-        if($res==True)
-        {
-
-        }
-    }
             
 ?>		
           
@@ -246,9 +272,6 @@ class="btn btn-warning">Add more items</button></a>
 <input class="btn btn-primary" id="del" name="q" type = "submit" value="Checkout" />
 </form>';}
 
-if(isset($_POST["q"])) {
-
-}
 ?>
 
 

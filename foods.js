@@ -66,4 +66,3 @@ function cartProcess(ID,count)
         cart.style.visibility = "hidden";
     
 }
-
