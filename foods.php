@@ -42,6 +42,11 @@ print_r($_SESSION['uid']);?>
                     <li>
                         <a href="#">Contact</a>
                     </li>
+                    <?php if(isset($_SESSION['uid'])){?>
+                    <li>
+                        <a href="userpage.php">Hello, <?php echo $_SESSION['uid']?></a>
+                    </li>
+                    <?php } ?>
                 </ul>
             </div>
 
@@ -121,12 +126,10 @@ include 'connect.php';
                         <p class="food-detail">'.$obj->foodDescription.
                         '</p>
                         <br>
-                        Quantity: <input type="number" min="1" 
-                        max="25" 
-                        name="quantity" class="form-control" value="1" style="width: 60px;">
-                        <span onclick="cartMake('.$obj->mid.')" name="quantity1"  class="btn btn-primary" id='.$obj->mid.'>Order</span>
-                        <span class="btn btn-primary" style="visibility:hidden;" name="change" id="add'.$obj->mid.'">+</span>
-                        <span class="btn btn-primary" style="visibility:hidden;" name="change" id="subtract'.$obj->mid.'">-</span>
+                    
+                        <span onclick="passId('.$obj->mid.')" name="quantity1"  class="btn btn-primary" id='.$obj->mid.'>Order</span>
+                        <span onclick="passId('.$obj->mid.')" class="btn btn-primary" style="visibility:hidden;" name="change" id="add'.$obj->mid.'">+</span>
+                        <span onclick="passId('.$obj->mid.')" class="btn btn-primary" style="visibility:hidden;" name="change" id="subtract'.$obj->mid.'">-</span>
             
                         <input 
                         type="hidden" name="item_name" value="'.$obj->foodName.'">
@@ -134,8 +137,6 @@ include 'connect.php';
                         type="hidden" name="item_price" value="'.$obj->foodPrice.'">
                         <input 
                         type="hidden" name="item_id" value="'.$obj->mid.'">
-                        <input 
-type="submit" name="add" style="margin-top:5px;" class="btn btn-success" value="Add to Cart">
                     </div>
                     </form>
                 </div>';}}

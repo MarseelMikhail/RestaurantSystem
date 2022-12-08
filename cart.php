@@ -107,6 +107,7 @@ session_start();
         $sql2= "DELETE FROM orders WHERE uid=".$_SESSION["uid"]." AND orderState=0 AND isPaid=0";
         $db->query($sql1);
         $db->query($sql2);
+        $_sessioon["oid"] = $obj->oid;
     } ;}
     if(isset($_POST["q"]))
     {
@@ -123,7 +124,7 @@ session_start();
 
         $sql= "SELECT oid FROM orders WHERE uid=".$_SESSION["uid"]." AND orderState=0 AND isPaid=0";
         $res = $db->query($sql);
-        if($res==True){$obj = $res->fetch_object();$oid=$obj->oid;}
+        if($res==True){$obj = $res->fetch_object();$oid=$obj->oid;$_sessioon["oid"] = $obj->oid;}
 
     }
     if(isset($_POST["q"]))
@@ -271,7 +272,7 @@ class="btn btn-warning">Add more items</button></a>
 <input   type="hidden" name="storeCheckout" value='.json_encode($decode).' id="store" />
 <input class="btn btn-primary" id="del" name="q" type = "submit" value="Checkout" />
 </form>';}
-
+include 'payment.php';
 ?>
 
 
