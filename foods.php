@@ -20,39 +20,7 @@ print_r($_SESSION['uid']);?>
 
 <body>
     <!-- Navbar Section Starts Here -->
-    <section class="navbar">
-        <div class="container">
-            <div class="logo">
-                <a href="#" title="Logo">
-                    <img src="images/logo.png" alt="Restaurant Logo" class="img-responsive">
-                </a>
-            </div>
-
-            <div class="menu text-right">
-                <ul>
-                    <li>
-                        <a href="index.html">Home</a>
-                    </li>
-                    <li>
-                        <a href="categories.html">Categories</a>
-                    </li>
-                    <li>
-                        <a href="foods.html">Foods</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                    <?php if(isset($_SESSION['uid'])){?>
-                    <li>
-                        <a href="userpage.php">Hello, <?php echo $_SESSION['uid']?></a>
-                    </li>
-                    <?php } ?>
-                </ul>
-            </div>
-
-            <div class="clearfix"></div>
-        </div>
-    </section>
+    <?php require('navbar.php'); ?>
     <!-- Navbar Section Ends Here -->
 
     <!-- fOOD sEARCH Section Starts Here -->

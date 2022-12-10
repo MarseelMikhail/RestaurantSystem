@@ -1,0 +1,170 @@
+
+h1{
+	text-align:center;
+	color:#373737;
+	font-family:'Times New Roman', Times, serif;
+}
+
+body{
+	background-color: antiquewhite;
+}
+.link{
+	text-decoration: none;
+	font-style: italic;
+}
+
+a.link{
+	color: violet
+}
+
+div.title{
+	grid-area: b;
+	margin: auto;
+
+}
+
+div.topGrid{
+	display: grid;
+	height: 120px;
+	margin: auto;
+	grid-template-columns: 150px auto 150px;
+	grid-template-areas: 
+    "a b c";
+}
+div.middleGrid{
+	display: grid;
+	margin: auto;
+	grid-template-columns: 5% auto 5%;
+	grid-template-areas: 
+    "a b c"
+	"d e f"
+	"g h i"
+	"j k l";
+}
+
+div.bottomGrid{
+	display: grid;
+	
+	margin: auto;
+	grid-template-columns: 5% auto 5%;
+	grid-template-areas: 
+    "a b c";
+}
+
+div.footerGrid{
+	grid-area: b;
+	display: grid;
+	text-align:center;
+}
+
+div.OrderGrid{
+	grid-area: b;
+	display: grid;
+	background-color: #373737;
+	color: #eeeeee;
+	width: 1000px;
+	margin: 50px;
+	vertical-align: middle;
+	margin-left: auto;
+	margin-right: auto;
+	grid-template-columns: 30px auto 180px 80px;
+	grid-gap: 2px;
+	padding: 4px;
+  }
+
+div.OrderGrid > div{
+	background-color: #eeeeee;
+	color: black;
+}
+
+div.loginForm{
+	grid-area: e;
+	margin: auto;
+	background-color: #373737;
+	color: #eeeeee;
+	width: 500px;
+	margin: auto;
+	text-align: center;
+}
+div.registrationForm{
+	grid-area: b;
+	margin: auto;
+
+
+}
+
+div.userInfo{
+	grid-area: c;
+	text-align: right;
+}
+div.creatPollLink{
+	grid-area: e;
+	margin: auto;
+
+}
+div.pollManagement{
+	grid-area: b;
+	display: grid;
+	background-color: #373737;
+	color: #eeeeee;
+	width: 1000px;
+	margin: 50px;
+	vertical-align: middle;
+	margin-left: auto;
+	margin-right: auto;
+	grid-template-columns: 100px 150px auto 400px 80px;
+	grid-gap: 2px;
+	padding: 4px;
+}
+
+div.pollManagement > div{
+	background-color: #eeeeee;
+	color: black;
+}
+
+
+div.creatNewPoll{
+	grid-area: b;
+	margin: auto;
+}
+div.pollCreator{
+	grid-area: b;
+	margin: auto;
+}
+div.votePoll{
+	grid-area: e;
+	margin: auto;
+
+}
+div.questionInResult{
+	grid-area: e;
+	margin: auto;
+}
+div.pollResult{
+	grid-area: h;
+	display: grid;
+	background-color: #373737;
+	color: #eeeeee;
+	width: 1000px;
+	margin: 50px;
+	vertical-align: middle;
+	margin-left: auto;
+	margin-right: auto;
+	grid-template-columns: auto 500px;
+	grid-gap: 2px;
+	padding: 4px;
+}
+div.pollResult > div{
+	background-color: #eeeeee;
+	color: black;
+}
+div.returnLinkMain{
+	grid-area: k;
+	margin: auto;
+
+}
+div.returnLinkManagement{
+	grid-area: k;
+	margin: auto;
+
+}

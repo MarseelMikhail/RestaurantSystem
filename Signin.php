@@ -100,23 +100,27 @@
 include 'connect.php';
 if(isset($_POST["signup"]))
 {
-    $sql= "INSERT INTO user(firstName, lastName, userName, email, password) VALUES(".json_encode($_POST['Fname']).",".json_encode($_POST['Lname']).",".json_encode($_POST['Username']).",".json_encode($_POST['Email']).",".json_encode($_POST['Password']).")";
+    $sql= "INSERT INTO user(firstName, lastName, userName, email, password, accountType) VALUES(".json_encode($_POST['Fname']).",".json_encode($_POST['Lname']).",".json_encode($_POST['Username']).",".json_encode($_POST['Email']).",".json_encode($_POST['Password']).", 1)";
     mysqli_query($db, $sql);
 }
 
 if(isset($_POST["login"]))
 
 {
-    $sql= "SELECT uid FROM user WHERE email=".json_encode($_POST['userEmail'])."AND password=".json_encode($_POST['userPass']).';';
+    $sql= "SELECT uid, accountType FROM user WHERE email=".json_encode($_POST['userEmail'])."AND password=".json_encode($_POST['userPass']).';';
     mysqli_query($db, $sql);
     $res = $db->query($sql);
     if(mysqli_num_rows($res) == 1)
     {
         $obj = $res -> fetch_object();
         $uid = $obj->uid;
+        $acc = $obj->accountType;
         header('location:foods.php');
         session_start();
+        if($acc==0)
         $_SESSION['uid'] = $uid;
+        if($acc==1)
+        $_SESSION['man'] = $uid;
     }
 
 }

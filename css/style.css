@@ -201,6 +201,40 @@ fieldset{
 }
 
 
+.boxm {
+    display: flex;
+    grid-template-columns: 3fr 3fr;
+    gap: 25px 1em;
+    margin: 1% auto;
+align-items: center;
+    border-color: rgb(92, 30, 150);
+
+  }
+  
+  .boxmin{
+    background-color: rgb(142 217 225);
+    width: 300px;
+    border: 7px solid rgb(92, 30, 150);;
+    padding: 50px;
+    margin: 1% auto;
+  text-align: center;
+  border-radius: 20%;
+  }
+  
+  .boxmin2{
+    background-color: rgb(142 217 225);
+    width: 300px;
+    border: 7px solid rgb(92, 30, 150);;
+    padding: 50px;
+    margin: 1% auto;
+  text-align: center;
+  border-radius: 20%;
+  }
+
+  .boxmin:hover {
+    background-color: #ff6b81;
+  }
+        
 
 /* CSS for Mobile Size or Smaller Screen */
 

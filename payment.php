@@ -4,6 +4,9 @@ include "connect.php";
 if(isset($_POST["q"]))
 {?>
 <br><br>
+
+<div class="boxm">
+  <div class="boxmin2" id="OFood">
     <form action="paid.php" class="login" method="post">
     <div class="field">
       <input type="text" placeholder="Name on card" name="cardName" required />
@@ -22,7 +25,7 @@ if(isset($_POST["q"]))
       <input type="submit" name="pay" value="Pay" />
     </div>
   </form>
-
+</div></div>
 <?php
 
 
