@@ -1,5 +1,4 @@
-<?php session_start();
-print_r($_SESSION['uid']);?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,7 +60,7 @@ print_r($_SESSION['uid']);?>
     <!-------------------------------------------------------------------------------------------------------------------------->
     
     <!-------------------------------------------------------------------------------------------------------------------------->
-<div id='put'> </div>
+
    
 
     <!-- MAIN CODE TO ACCESS AND OUTPUT EACH ITEM -->
@@ -107,7 +106,7 @@ session_start();
         $sql2= "DELETE FROM orders WHERE uid=".$_SESSION["uid"]." AND orderState=0 AND isPaid=0";
         $db->query($sql1);
         $db->query($sql2);
-        $_sessioon["oid"] = $obj->oid;
+        $_SESSION["oid"] = $obj->oid;
     } ;}
     if(isset($_POST["q"]))
     {
@@ -115,7 +114,7 @@ session_start();
         
 
 
-        print_r('HI HereToo'.$_POST["storeCheckout"]);
+        // print_r('HI HereToo'.$_POST["storeCheckout"]);
         $sql= "INSERT INTO orders(uid,orderPlaceDate, arriveIn, orderState, orderNote, isPaid, orderedRestaurant)
         VALUES
         (".$_SESSION["uid"].",NOW(), '35', '0', 'none', '0', 'MCD');";
@@ -124,7 +123,7 @@ session_start();
 
         $sql= "SELECT oid FROM orders WHERE uid=".$_SESSION["uid"]." AND orderState=0 AND isPaid=0";
         $res = $db->query($sql);
-        if($res==True){$obj = $res->fetch_object();$oid=$obj->oid;$_sessioon["oid"] = $obj->oid;}
+        if($res==True){$obj = $res->fetch_object();$oid=$obj->oid;$_SESSION["oid"] = $obj->oid;}
 
     }
     if(isset($_POST["q"]))
@@ -132,7 +131,7 @@ session_start();
         else
       $decode = json_decode($_POST["store"],true);
 
-      print_r($decode);
+    //   print_r($decode);
       $total = 0;
       echo '<h3>Your Cart</h3>' ; 
       ?>
@@ -158,7 +157,7 @@ session_start();
                     
                   
                 while ($obj = $res -> fetch_object())
-                    {print_r($obj); 
+                    {   //print_r($obj); 
 
 
                         if(isset($_POST["q"]))
