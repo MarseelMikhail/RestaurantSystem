@@ -1,10 +1,5 @@
 <section class="navbar">
         <div class="container">
-            <div class="logo">
-                <a href="#" title="Logo">
-                    <img src="images/logo.png" alt="Restaurant Logo" class="img-responsive">
-                </a>
-            </div>
             <form method="post" action="userMain.php">
             <div class="menu text-right">
                 <ul>

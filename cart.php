@@ -173,6 +173,14 @@ $obj->foodPrice, 2); ?></td>
 	</tr>
 	</table>
 
+    <?php    if(isset($_POST["q"]))
+                        {
+                            $sql= "UPDATE orders
+                            SET order_total =".number_format($total, 2)."
+                            WHERE oid=".intval($_SESSION['oid'])." AND uid=".intval($_SESSION['uid']).";";
+                            mysqli_query($db, $sql);
+                        }
+?>
                     <?php 
                 
             }
@@ -273,7 +281,7 @@ include 'payment.php';
     <!-- footer Section Starts Here -->
     <section class="footer">
         <div class="container text-center">
-            <p>All rights reserved. Designed By <a href="#">Vijay Thapa</a></p>
+        <p>All rights reserved. work done By <a href="#">Keerat Tanwar</a></p>
         </div>
     </section>
     <!-- footer Section Ends Here -->

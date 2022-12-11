@@ -80,17 +80,20 @@ session_start();
 if(isset($_POST["pay"]))
 {
 
-
-    $sql=
+if(isset($_POST['savedpay']) ? $_POST['savedpay'] : false)
+    {$sql=
     "UPDATE orders 
     SET 
-        isPaid = 1
+        isPaid = 1,
+        cpid=".$_POST["PID"].",
+        CDid=".$_POST["CDID"]."
     WHERE
         oid =".$_SESSION['oid'].";";
 
     $db->query($sql);
         // unset($_SESSION['uid']);
         // unset($_SESSION['oid']);
+    }
 
 }
 ?>
@@ -116,7 +119,7 @@ if(isset($_POST["pay"]))
     <!-- footer Section Starts Here -->
     <section class="footer">
         <div class="container text-center">
-            <p>All rights reserved. Designed By <a href="#">Vijay Thapa</a></p>
+        <p>All rights reserved. work done By <a href="#">Keerat Tanwar</a></p>
         </div>
     </section>
     <!-- footer Section Ends Here -->

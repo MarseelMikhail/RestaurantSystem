@@ -115,12 +115,14 @@ if(isset($_POST["login"]))
         $obj = $res -> fetch_object();
         $uid = $obj->uid;
         $acc = $obj->accountType;
-        header('location:foods.php');
+        
         session_start();
         if($acc==0)
-        $_SESSION['uid'] = $uid;
+        {$_SESSION['uid'] = $uid;
+        header('location:userMain.php');}
         if($acc==1)
-        $_SESSION['man'] = $uid;
+        {$_SESSION['man'] = $uid;
+        header('location: Manager_page/main.php');}
     }
 
 }

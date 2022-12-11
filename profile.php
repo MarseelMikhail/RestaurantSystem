@@ -32,94 +32,23 @@ session_start(); ?>
 
 
     <!-- MAIN CODE TO ACCESS AND OUTPUT EACH ITEM -->
+
+
+
+
+
+
+    
 <?php
 
 include 'connect.php';
-$rows=0; 
-$sql= "SELECT * FROM customerDetails WHERE uid=".$_SESSION["uid"];
-$res = $db->query($sql);
-if($res==True){
-    $rows=mysqli_num_rows($res);
-    if($rows>0)
-    echo '<div class="boxm" style="display: grid">';
-
-while ($obj = $res -> fetch_object()) {
-
-    echo '
-    
-    <div class="boxmin2" id="OFood">
-              
-                    <div >
-                        abcdefj
-                    </div>
-
-                    <div class="food-menu-desc">
-                        <h4>'.$obj->postal.'</h4>
-                        <p class="food-price">'.$obj->phone.'</p>
-                        <p class="food-detail">'.$obj->address.
-                        '</p>
-                       
-                        <br>
-                        <form method="post" action="#">
-                        <input 
-                        type="hidden" name="add_id" class="btn btn-primary" value='.$obj->CDid.'>
-                        <input 
-                        type="submit" name="del_add" class="btn btn-primary" value="delete">
-                        </form>
-                    </div>
-                    </div>
-                ';
 
 
-
+if(isset($_POST["pay"]))
+{
+    $sql= "INSERT INTO payment(cardholder, cardNumber, cvv, exp, uid) VALUES(".json_encode($_POST['cardName']).", ".json_encode($_POST['cardNum']).", ".intval($_POST['cvv']).", ".json_encode($_POST['exp']).", ".$_SESSION["uid"].");";
+    mysqli_query($db, $sql);
 }
-if($rows>0)
-echo '</div>';
-
-}
-if($rows==0) print_r('none');
-?>
-</div>
-
-<br>
-<div> 
-
-
-
-
-  <div class="boxm">
-  <div class="boxmin2" id="OFood">
-
-
-  <form action="#" class="login" method="post">
-    <div class="field">
-      <input type="text" placeholder="address" name="add" required />
-    </div>
-    <div class="field">
-      <input type="text" placeholder="postal" name="pos" required />
-    </div>
-    <div class="field">
-      <input type="text" placeholder="phone" name="ph" required />
-    </div>
-
-    <div class="field btn">
-      <div class="btn-layer"></div>
-      <input type="submit" name="subAdd" value="Submit" />
-    </div>
-  </form>
-
-
-  </div>
-</div>
-
-</div>
-
-</div>
-
-
-
-
-<?php
 
 if(isset($_POST['subAdd']))
 {$sql= "INSERT INTO customerDetails(address,phone,postal,uid) VALUES(".json_encode($_POST['add']).", ".json_encode($_POST['ph']).", ".json_encode($_POST['pos']).", ".$_SESSION["uid"].");";
@@ -133,7 +62,164 @@ if(isset($_POST['del_add']))
     header("location: profile.php");
 
 }
+
+if(isset($_POST['del_pay']))
+{print_r('isset');
+    $sql= "DELETE FROM payment WHERE pid=".intval($_POST['pay_id']).";";
+    $resd = $db->query($sql);
+    header("location: profile.php");
+
+}
+
+
+
+
+
+$rows=0; 
+$sql= "SELECT * FROM customerDetails WHERE uid=".$_SESSION["uid"];
+$res = $db->query($sql);
+if($res==True){
+    $rows=mysqli_num_rows($res);
+    if($rows>0)
+    echo '<h1>Saved Address</h1><div class="boxm" style="display: grid">';
+
+while ($obj = $res -> fetch_object()) {
+ 
+    echo '
+    
+    <div class="boxmin2" style="background-color: rgb(161 193 197)" id="OFood">
+              
+                    <div class="food-menu-desc">
+                        <h4>'.$obj->postal.'</h4>
+                        <p class="food-price">'.$obj->phone.'</p>
+                        <p class="food-detail">'.$obj->address.
+                        '</p>
+                       
+                        <br>
+                        <form method="post" action ="'.$_SERVER["PHP_SELF"].'">
+                        <input 
+                        type="hidden" name="add_id" class="btn btn-primary" value='.$obj->CDid.'>
+                        <input 
+                        type="submit" name="del_add" class="btn btn-primary" value="delete">
+                        </form>
+                    </div>
+                    </div>
+                ';
+
+
+
+
+}
+if($rows>0)
+echo '</div>';
+
+}
+
+$rows=0; 
+$sqlP= "SELECT * FROM payment WHERE uid=".$_SESSION["uid"];
+$resP = $db->query($sqlP);
+if($resP==True){
+    $rows=mysqli_num_rows($resP);
+    if($rows>0)
+    echo '<h1>Saved Payments</h1><div class="boxm" style="display: grid">';
+
+while ($obj = $resP -> fetch_object()) {
+ 
+    echo '
+    
+    <div class="boxmin2" id="OFood">
+              
+                    <div class="food-menu-desc">
+                        <h4  >'.$obj->cardholder.'</h4>
+                        <p class="food-price" >'.$obj->cardNumber.'</p>
+                        <p class="food-detail"  >'.$obj->cvv.
+                        '</p>
+                        <p class="food-price"  >'.$obj->exp.'</p>
+                       
+                        <br>
+                        <form method="post" action ="'.$_SERVER["PHP_SELF"].'">
+                        <input 
+                        type="hidden" name="pay_id" class="btn btn-primary" value='.$obj->pid.'>
+                        <input 
+                        type="submit" name="del_pay" class="btn btn-primary" value="delete">
+                        </form>
+                    </div>
+                    </div>
+                ';
+            }
+            if($rows>0)
+            echo '</div>';
+            
+            }
+
+
+
+
+if($rows==0) print_r('none');
 ?>
+</div>
+
+<br>
+<div> 
+
+
+
+
+  <div class="boxm">
+    
+
+  <div class="boxmin2" style="background-color: rgb(195 195 195);">
+    <form  class="login" method="post">
+    <h1>New Payment</h1>
+    <div class="field">
+      <input type="text" placeholder="Name on card" name="cardName" required />
+    </div>
+    <div class="field">
+      <input type="text" placeholder="cardNum" name="cardNum" required />
+    </div>
+    <div class="field">
+      <input type="text" placeholder="Expiry" name="exp" required />
+    </div>
+    <div class="field">
+      <input type="text" placeholder="cvv" name="cvv" required />
+    </div>
+    <div class="field btn">
+      <div class="btn-layer"></div>
+      <input type="submit" name="pay" class="btn btn-primary" value="Save" />
+    </div>
+  </form>
+</div>
+
+  <div class="boxmin2" style="background-color: rgb(195 195 195);" id="OFood">
+
+
+  <form  class="login" method="post">
+    <h1>New Address</h1>
+    <div class="field">
+      <input type="text" placeholder="address" name="add" required />
+    </div>
+    <div class="field">
+      <input type="text" placeholder="postal" name="pos" required />
+    </div>
+    <div class="field">
+      <input type="text" placeholder="phone" name="ph" required />
+    </div>
+
+    <div class="field btn">
+      <div class="btn-layer"></div>
+      <input type="submit" name="subAdd" class="btn btn-primary" value="Save" />
+    </div>
+  </form>
+
+
+  </div>
+</div>
+
+</div>
+
+</div>
+
+
 
 
 

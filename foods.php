@@ -149,7 +149,7 @@ include 'connect.php';
     <!-- footer Section Starts Here -->
     <section class="footer">
         <div class="container text-center">
-            <p>All rights reserved. Designed By <a href="#">Vijay Thapa</a></p>
+            <p>All rights reserved. work done By <a href="#">Keerat Tanwar</a></p>
         </div>
     </section>
 
