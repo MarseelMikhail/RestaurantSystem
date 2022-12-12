@@ -4,4 +4,4 @@
 <br>
 2)GOTO your web Browser type URL: localhost/NAME_OF_FOLDER_IN_htdocs
 <br>
-for database, create database 'online_orders' first, then run the sql file.(you can import in using PHPmyAdmin)
+For the database, create database 'online_orders' first, -> then run the sql file.(you can import it using PHPmyAdmin)
