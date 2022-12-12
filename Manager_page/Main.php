@@ -4,6 +4,7 @@ require_once("database.php");
 
 
 
+
 try {
       $conn = new PDO("mysql:host=localhost;dbname=$database", $user, $pass);
   } catch (PDOException $e) {
@@ -42,12 +43,15 @@ try {
     
     <title>Restaurant Manager Page</title>
     <link rel="stylesheet" type="text/css" href="restaurant.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
 
   </head>
 
 
   
   <body>
+
+  <?php include("navbar.php"); ?>
     <div class="topGrid">
       <div class="title"><h1>Restaurant Manager Page</h1></div>
     </div>

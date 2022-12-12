@@ -10,7 +10,7 @@ cart.addEventListener("click",function(){
     
     console.log('NEWW');
     sessionStorage.setItem("naam", "kaam");
-alert("2");
+
 });
 
 

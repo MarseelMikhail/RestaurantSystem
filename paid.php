@@ -85,8 +85,8 @@ if(isset($_POST['savedpay']) ? $_POST['savedpay'] : false)
     "UPDATE orders 
     SET 
         isPaid = 1,
-        cpid=".$_POST["PID"].",
-        CDid=".$_POST["CDID"]."
+        pid=".$_POST["savedpay"].",
+        CDid=".$_POST["savedadd"]."
     WHERE
         oid =".$_SESSION['oid'].";";
 

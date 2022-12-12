@@ -1,17 +1,11 @@
+
 <?php 
-session_start();
-$flag=0;
-if(isset($_SESSION['uid']))
-{$flag=1;
-print_r($_SESSION['uid']);}
-else
-$flag=0;
-?>
+session_start(); ?>
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html>
+  <head>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> -->
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <!-- Important to make website responsive -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurant Website</title>
@@ -19,15 +13,12 @@ $flag=0;
 
     <!-- Link our CSS file -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/form.css">
+    
 
-
-</head>
-
-
-
-<body>
-    <!-- Navbar Section Starts Here -->
-<?php require('navbar.php'); ?>
+  </head>
+  <body>  
+  <?php require('navbar.php'); ?>
     <!-- Navbar Section Ends Here -->
 
 
@@ -35,71 +26,68 @@ $flag=0;
     <section class="food-search text-center">
         <div class="container">
             
-<h1>McBurger</h1>
+<h1>Past orders</h1>
         </div>
     </section>
     <!-- fOOD sEARCH Section Ends Here -->
 
 
     <!-- MAIN CODE TO ACCESS AND OUTPUT EACH ITEM -->
-<?php
 
-include 'connect.php';
-
-?>
-
-    <!-- MAIN CODE TO ACCESS AND OUTPUT EACH ITEM -->
-    <!-- fOOD MEnu Section Starts Here -->
 
 
 <?php
-// $sql= "SELECT * FROM menu";
-// $res = $db->query($sql);
-// if($res==True)
-// {
-//    while ($obj = $res -> fetch_object()) {
-//     printf("%s (%s)\n", $obj->foodName, $obj->foodPrice);
-//   }
+$rows=0; 
 
-?>
+$sqlO= "SELECT * FROM orders WHERE uid=".$_SESSION["uid"];
+$resO = $db->query($sqlO);
 
 
+if ($resO == True) {
+    $i = 0;
+    $rows = mysqli_num_rows($resO);
+    if ($rows > 0)
+        echo '<h1>Orders</h1><div class="boxm" style="display: grid">';
 
+    while ($obj = $resO->fetch_object()) {
+        $i = $i + 1;
+        echo '
+    
+        <div class="boxmin2" id="OFood">
+                  
+                        <div class="food-menu-desc">
+                        <h4  >'.$i.'</h4>
+                            <h4  >Total: $'.$obj->order_total.'</h4>
+                            <p class="food-price" >ordernote: '.$obj->orderNote.'</p>
+                            <p class="food-detail"  >'.$obj->orderPlaceDate.
+                            '</p>
 
+                           
+                            <br>
+                            
+    
+    
+                    ';
 
-<!-- SEND DATA TO NEXT PAGE -->
+        $sqlD= "SELECT * FROM order_details WHERE oid=".$obj->oid;
+        $resD = $db->query($sqlD);
+        while ($obj1 = $resD->fetch_object()) {
 
-                                    <!-- ################################################################# -->
-
-
-    <section class="food-menu">
-
-</div>
-
-
-
-
-<div class="boxm">
-  <div class="boxmin" id="OFood"><h1>Order Food</h1></div>
-  <?php if(isset($_SESSION['uid'])){ $flag=1;?>
-  <div class="boxmin" id="profile"><h1>Profile</h1></div>
-  <?php } ?>
-</div>
-
-
-
-
- <?php 
-?>
-            <div class="clearfix"></div>
-
+            $sql= "SELECT * FROM menu WHERE mid=".$obj1->mid;
+            $res = $db->query($sql);
+            while ($obj2 = $res->fetch_object()) {
+                $foodname = $obj2->foodName;}
+            echo '
             
+            <p class="food-detail"  >'.$foodname.
+            ': '.$obj1->quantity.' </p>';
 
-        </div>
+        }
+        echo '</div></div>';
+    }
+}
 
-    </section>
-    <!-- fOOD Menu Section Ends Here -->
-
+?>
 
     <!-- social Section Starts Here -->
     <section class="social">
@@ -125,28 +113,3 @@ include 'connect.php';
         <p>All rights reserved. University project.Current page work done onit By <a href="https://github.com/keerat21">Keerat Tanwar</a></p>
         </div>
     </section>
-
-
-</body>
-
-<script type="text/javascript">
-    var flag = <?php echo $flag; ?>;
-    var o_food = document.getElementById("OFood");
-
-
-if(flag==1)
-{    var profile = document.getElementById("profile");
-    
-    profile.addEventListener("click",function(){ 
-        window.location.href = "profile.php";
-});}
-    o_food.addEventListener("click",function(){ 
-if(flag==0)
-window.location.href = "Signin.php";
-else if(flag==1)
-
-window.location.href = "foods.php";
-});
-
-</script>
-</html>

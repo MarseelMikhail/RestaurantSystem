@@ -176,7 +176,7 @@ $obj->foodPrice, 2); ?></td>
     <?php    if(isset($_POST["q"]))
                         {
                             $sql= "UPDATE orders
-                            SET order_total =".number_format($total, 2)."
+                            SET order_total =".number_format($total, 2).", orderNote=".json_encode($_POST['note'])."
                             WHERE oid=".intval($_SESSION['oid'])." AND uid=".intval($_SESSION['uid']).";";
                             mysqli_query($db, $sql);
                         }
@@ -239,16 +239,9 @@ $obj->foodPrice, 2); ?></td>
 
 	<?php
      if(!isset($_POST["q"])) {
-	echo '<a href="cart.php?action=empty"><button class="btn btn-danger"><span 
-class="glyphicon glyphicon-trash"></span> 
-Empty Cart</button></a>
-
-<a 
-href="index.php"><button 
-class="btn btn-warning">Add more items</button></a>
-
-
+	echo '
 <form method="post" action="cart.php?action=q">
+<input id="note" name="note" type = "textbox" style= "height: 42px; width : 300px;" placeholder= "Add Notes(optional)" />
 <input   type="hidden" name="storeCheckout" value='.json_encode($decode).' id="store" />
 <input class="btn btn-primary" id="del" name="q" type = "submit" value="Checkout" />
 </form>';}
@@ -259,7 +252,6 @@ include 'payment.php';
 
 </div>
     <!-- fOOD cart Section Ends Here -->
-
     <!-- social Section Starts Here -->
     <section class="social">
         <div class="container text-center">
@@ -271,7 +263,7 @@ include 'payment.php';
                     <a href="#"><img src="https://img.icons8.com/fluent/48/000000/instagram-new.png"/></a>
                 </li>
                 <li>
-                    <a href="#"><img src="https://img.icons8.com/fluent/48/000000/twitter.png"/></a>
+                    <a href="https://github.com/keerat21"><img src="images/gitIcon.gif" width="50" height="50"/></a>
                 </li>
             </ul>
         </div>
@@ -281,10 +273,9 @@ include 'payment.php';
     <!-- footer Section Starts Here -->
     <section class="footer">
         <div class="container text-center">
-        <p>All rights reserved. work done By <a href="#">Keerat Tanwar</a></p>
+        <p>All rights reserved. University project.Current page work done onit By <a href="https://github.com/keerat21">Keerat Tanwar</a></p>
         </div>
     </section>
-    <!-- footer Section Ends Here -->
 
 </body>
 

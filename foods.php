@@ -127,7 +127,6 @@ include 'connect.php';
     </section>
     <!-- fOOD Menu Section Ends Here -->
 
-
     <!-- social Section Starts Here -->
     <section class="social">
         <div class="container text-center">
@@ -139,7 +138,7 @@ include 'connect.php';
                     <a href="#"><img src="https://img.icons8.com/fluent/48/000000/instagram-new.png"/></a>
                 </li>
                 <li>
-                    <a href="#"><img src="https://img.icons8.com/fluent/48/000000/twitter.png"/></a>
+                    <a href="https://github.com/keerat21"><img src="images/gitIcon.gif" width="50" height="50"/></a>
                 </li>
             </ul>
         </div>
@@ -149,10 +148,9 @@ include 'connect.php';
     <!-- footer Section Starts Here -->
     <section class="footer">
         <div class="container text-center">
-            <p>All rights reserved. work done By <a href="#">Keerat Tanwar</a></p>
+        <p>All rights reserved. University project.Current page work done onit By <a href="https://github.com/keerat21">Keerat Tanwar</a></p>
         </div>
     </section>
-
 
 </body>
     <!-- footer Section Ends Here -->

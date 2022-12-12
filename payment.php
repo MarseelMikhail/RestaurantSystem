@@ -19,9 +19,9 @@ if($rows==0)
 }
 if($res==True && $rows>0)
     {
-      echo '<form action="paid.php" class="login" method="post"><label for="savedpay">Choose a saved address:</label>
+      echo '<form action="paid.php" class="login" method="post"><label for="savedadd">Choose a saved address:</label>
 
-      <select name="savedpay" id="savedpay">';
+      <select name="savedadd" id="savedadd">';
       echo '<option name="cardnum" >Select Please</option>';
       while ($obj = $res -> fetch_object()) 
       {

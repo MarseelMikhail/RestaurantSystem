@@ -100,7 +100,7 @@
 include 'connect.php';
 if(isset($_POST["signup"]))
 {
-    $sql= "INSERT INTO user(firstName, lastName, userName, email, password, accountType) VALUES(".json_encode($_POST['Fname']).",".json_encode($_POST['Lname']).",".json_encode($_POST['Username']).",".json_encode($_POST['Email']).",".json_encode($_POST['Password']).", 1)";
+    $sql= "INSERT INTO user(firstName, lastName, userName, email, password, accountType) VALUES(".json_encode($_POST['Fname']).",".json_encode($_POST['Lname']).",".json_encode($_POST['Username']).",".json_encode($_POST['Email']).",".json_encode($_POST['Password']).", 0)";
     mysqli_query($db, $sql);
 }
 
