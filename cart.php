@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="css/style.css">
 
 </head>
-
+Tests tTest
 <body>
     <!-- Navbar Section Starts Here -->
     <?php session_start(); require('navbar.php'); ?>
@@ -21,7 +21,7 @@
     <!-- fOOD sEARCH Section Starts Here -->
     <section class="food-search text-center">
         <div class="container">
-            
+         
  <h1>Cart</h1>
         </div>
     </section>
